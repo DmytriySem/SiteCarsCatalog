@@ -1,0 +1,52 @@
+﻿@model Catalog.Models.CatalogPageViewModel
+
+<div id="catalogContent" class="flex-gor">
+    <div class="col-md-3 flex-ver">
+        <div id="jstree"></div>
+        <div id="filter">
+            <div class="flex-gor-content">
+                <strong>@Html.DisplayNameFor(model => model.Colors)</strong>
+                <span>@Html.DropDownList("colorsSelect", Model.Colors)</span>
+            </div>
+            <div class="flex-gor-content">
+                <strong style="white-space:nowrap">@Html.DisplayNameFor(model => model.VolEngines)</strong>
+                <span>@Html.DropDownList("volEngSelect", Model.VolEngines)</span>
+            </div>
+            <div class="flex-gor-content">
+                <div>
+                    <strong>@Html.Label("Date:")</strong>
+                </div>
+                <div class="flex-ver-content" style="margin-left:10px;">
+                    <div style="text-align:center;">
+                        @Html.Label("month/day/year", new { id = "dateLabel" })
+                    </div>
+                    <div>
+                        <span>@Html.TextBox("date", DateTime.Now.ToShortDateString(), new { id = "datepicker" })</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <strong>@Html.Label("Prices:")</strong>
+                    <span id="price" data-min-price='@Model.MinPrice' data-max-price='@Model.MaxPrice'></span>
+                </div>
+                <div id="slider"></div>
+            </div>
+            <div id="resetDiv">
+                <input type="button" name="resetBtn" id="resetBtn" value="RESET" class="ui-priority-secondary ui-button ui-widget ui-corner-all" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div id="countCars"></div>
+        <div id="countCarsSelect">
+            @Html.DropDownList("tileCount", Model.TileCounts)
+        </div>
+        <div id="findCars"></div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jsTree")
+}

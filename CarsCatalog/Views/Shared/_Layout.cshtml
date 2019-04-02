@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/jsTree")
+</head>
+<body>
+    <div class="container body-content">
+        <div class="flex-gor">
+            <div id="btnsLink" class="col-md-3 flex-gor">
+                @Html.ActionLink("BRANDS", "Brands", "Brand",
+                           null,
+                           new {
+                               @class = "ui-priority-primary ui-button ui-widget ui-corner-all",
+                               id = "brandsBtnLink"
+                           })
+                @Html.ActionLink("CATALOG", "Index", "Catalog",
+                           null,
+                           new {
+                               @class = "ui-priority-primary ui-button ui-widget ui-corner-all hidden",
+                               id = "catalogBtnLink"
+                           })
+            </div>
+            <div id="title" class="col-md-9">
+                <h1 class="ui-widget-header">CARS CATALOG</h1>
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

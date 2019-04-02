@@ -1,0 +1,32 @@
+﻿@model Catalog.Models.BrandViewModel
+@using Catalog.Helpers
+
+@using (Html.BeginForm("Edit", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <div>
+            @Html.GetImageByte(Model.Photo)
+        </div>
+        @Html.ValidationSummary(true)
+        <div class="data-form">
+            <div>
+                @Html.EditorFor(model => model.Id)
+            </div>
+            <div class="data-form-row-input">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+            <div class="data-form-row-input">
+                @Html.LabelFor(model => model.Photo)
+                @Html.TextBoxFor(model => model.File, new { type = "file" })
+                @Html.ValidationMessageFor(model => model.File)
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

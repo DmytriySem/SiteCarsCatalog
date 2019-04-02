@@ -1,0 +1,35 @@
+﻿@model Catalog.Models.CarPageViewModel
+@using Catalog.Helpers
+
+@{
+    ViewBag.Title = "CARS";
+    IHtmlString str = new HtmlString("<a class='ui-priority-primary ui-button ui-widget ui-corner-all' href='" +
+        Url.Action("Models", "Model", new { brandId = Model.BrandId, brandName = Model.BrandName }) +
+        "'>" +
+        @Model.BrandName.ToUpper() +
+        " MODELS</a>");
+}
+
+<h2>@Model.BrandName.ToUpper() @Model.ModelName.ToUpper()</h2>
+
+<div class="flex-gor">
+    <div class="col-md-3 flex-ver">
+        <div class="flex-gor">@Html.GetImageByte(Model.BrandPhoto)</div>
+        <div class="flex-gor">@Html.GetImageString(Model.ModelPhotoUrl)</div>
+    </div>
+
+    <div class="col-md-9 flex-gor">
+        <div id="jpg-href" href-create="@Url.Action("Create")"
+             href-delete="@Url.Action("Delete")"
+             href-edit="@Url.Action("Edit")"></div>
+        <table id="jqg" href="@Url.Action("GetCars", new { modelId = Model.ModelId })"></table>
+        <div id="jpager"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $("#btnsLink").append("@str")
+    </script>
+    @Scripts.Render("~/bundles/jquery-grid")
+}

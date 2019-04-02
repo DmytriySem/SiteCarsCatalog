@@ -1,0 +1,9 @@
+﻿@model Catalog.Models.ModelViewModel
+
+@using (Html.BeginForm("Delete", "Model", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h3>Are you sure you want to delete <mark>@Html.DisplayFor(model => model.Name)</mark>?</h3>
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.BrandId)
+}

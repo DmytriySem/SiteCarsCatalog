@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Catalog.Models.CatalogCarViewModel>
+@using Catalog.Helpers
+
+@{
+    int itemsInRow = ViewBag.NumOfCols;
+    var width = Math.Round((double)100 / ViewBag.NumOfCols);
+    int count = Model.Count();
+
+    string backgroundModelImage = String.Empty;
+
+    var description = String.Empty;
+}
+
+<div id="countFoundCars" data-found-cars="@count">
+    <div class="data-content-container">
+        @foreach (var item in Model)
+        {
+            backgroundModelImage = item.ModelPhotoUrl == null ? "/Content/Images/noModelImage.png" : "/Content/Images/Models/" + item.ModelPhotoUrl;
+
+            <article class="div-tile" style="display:flex;flex-flow:column nowrap;border:2px solid #ff7b00; width:@width%; background-image:url(@backgroundModelImage)">
+                <div style="display:flex; justify-content:center;">
+                    @Html.GetImageByte(item.BrandPhoto)
+                </div>
+                <div id="tile" style="position:absolute;bottom:0">
+                    <div>
+                        @Html.LabelFor(model => item.Color)
+                        <strong style="color:@item.Color">@item.Color.ToString()</strong>
+                    </div>
+                    <div>
+
+                        @Html.LabelFor(model => item.VolEngine)
+
+                        <strong>
+                            @item.VolEngine.ToString()
+                        </strong>
+                    </div>
+                    <div>
+
+                        @Html.LabelFor(model => item.Description)
+
+                        <strong>
+                            @{
+                                description = item.Description == null ? String.Empty : item.Description.ToString();
+                            }
+                            @description
+                        </strong>
+                    </div>
+                    <div>
+
+                        @Html.LabelFor(model => item.Price)
+
+                        <strong>
+                            @item.Price.ToString()
+                        </strong>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Catalog.Models.BrandViewModel>
+@using Catalog.Helpers
+
+@{
+    ViewBag.Title = "BRANDS";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="dialogContent"></div>
+
+<div class="flex-gor">
+    @foreach (var item in @Model)
+    {
+        <div class="ui-widget-content">
+            <div>
+                <h4>@item.Name.ToUpper()</h4>
+            </div>
+            <div>
+                <a href="@Url.Action("Models", "Model", new { brandId = item.Id, brandName = item.Name })">
+                    @Html.GetImageByte(item.Photo)
+                </a>
+            </div>
+            <div class="flex-gor">
+                @Html.ActionLink("Edit", "Edit", "Brand",
+               new { id = item.Id },
+               new {
+                   @class = "view-dialog ui-priority-secondary ui-button ui-widget ui-corner-all",
+                   data_dialog_title = "Edit Brand",
+                   data_action = "EDIT"
+               })
+
+                @Html.ActionLink("Delete", "Delete", "Brand",
+               new { id = item.Id },
+               new {
+                   @class = "view-dialog ui-priority-secondary ui-button ui-widget ui-corner-all",
+                   data_dialog_title = "Remove Brand",
+                   data_action = "DELETE"
+               })
+            </div>
+        </div>
+    }
+</div>
+
+<div id="btnCreate">
+    @Html.ActionLink("Add New", "Create", "Brand",
+    new { },
+    new {
+        @class = "view-dialog ui-priority-primary ui-button ui-widget ui-corner-all",
+        data_dialog_title = "Add New Brand",
+        data_action = "ADD"
+        })
+</div>
+
+@section scripts{
+    <script>
+        $('#brandsBtnLink').addClass('hidden');
+        $('#catalogBtnLink').removeClass('hidden');
+    </script>
+    @Scripts.Render("~/bundles/view-dialog")
+}
